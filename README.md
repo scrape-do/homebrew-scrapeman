@@ -20,19 +20,19 @@
 ## Install
 
 ```bash
-brew install --cask --no-quarantine scrape-do/scrapeman/scrapeman
+brew install --cask scrape-do/scrapeman/scrapeman
 ```
 
-That's it. The app launches without any Gatekeeper warning. No "App is damaged" dialog, no right-click → Open dance, no `xattr -cr` shell command. Brew bypasses the macOS quarantine attribute when you pass `--no-quarantine`, and the cask handles the rest.
+That's it. One command. The app launches without any Gatekeeper warning — no "App is damaged" dialog, no right-click → Open dance, no manual shell incantation.
 
-> **Why `--no-quarantine`?**
-> Scrapeman is currently **ad-hoc signed** — Apple Developer ID notarization isn't on yet. Without `--no-quarantine`, macOS would flag the freshly downloaded `.app` and refuse to open it. The flag tells Homebrew to skip setting the quarantine attribute when copying the app into `/Applications`. Notarization is on the long-term roadmap; once it lands you'll be able to drop the flag.
+> **What's happening under the hood:**
+> Scrapeman is currently **ad-hoc signed** (Apple Developer ID notarization is on the long-term roadmap). Modern Homebrew always sets `com.apple.quarantine` on freshly downloaded casks, so without help the first launch would trigger Gatekeeper. The cask ships a `postflight` block that runs `xattr -cr "#{appdir}/Scrapeman.app"` immediately after install, stripping the quarantine bit and clearing the warning. Once Scrapeman is properly notarized, the postflight will be removed and there will be nothing left to do.
 
 If you prefer to add the tap explicitly first:
 
 ```bash
 brew tap scrape-do/scrapeman
-brew install --cask --no-quarantine scrapeman
+brew install --cask scrapeman
 ```
 
 Both forms install the same cask.

@@ -26,6 +26,16 @@ cask "scrapeman" do
 
   app "Scrapeman.app"
 
+  # Strip the quarantine xattr that Homebrew sets on every cask install
+  # since it dropped --no-quarantine. Scrapeman is ad-hoc signed (Apple
+  # Developer ID notarization is on the long-term roadmap) so without
+  # this the user would see a Gatekeeper warning on first launch.
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-cr", "#{appdir}/Scrapeman.app"],
+                   sudo: false
+  end
+
   zap trash: [
     "~/Library/Application Support/Scrapeman",
     "~/Library/Preferences/com.scrapeman.app.plist",
