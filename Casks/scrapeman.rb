@@ -1,14 +1,14 @@
 cask "scrapeman" do
-  version "0.2.1"
+  version "0.2.2"
 
   on_arm do
-    sha256 "e6c80caa1ddf7af91d522a62ddc319d77076a0e8cea239193e0942fad44cc18d"
+    sha256 "02623d5d06822f32c9578fd5c3b577e5d41601f2cd85449963dd65346e5e1147"
     url "https://github.com/scrape-do/scrapeman/releases/download/v#{version}/Scrapeman-#{version}-arm64.dmg",
         verified: "github.com/scrape-do/scrapeman/"
   end
 
   on_intel do
-    sha256 "4509706d4425accca7468772118757efccd1bfc6749911430854f6cc15d3a74e"
+    sha256 "0c2b53dbfd9778c6719d331dcd5639d8809a4be4c6b7d9b55c48aaa595e67c56"
     url "https://github.com/scrape-do/scrapeman/releases/download/v#{version}/Scrapeman-#{version}-x64.dmg",
         verified: "github.com/scrape-do/scrapeman/"
   end
